@@ -114,6 +114,13 @@ def await_midi_input():
         if midi_input.poll():
             return midi_input.read(10)
 
+def should_recalculate_beams(beams : list[dict], n_32ths : int):
+
+    for beam in beams:
+        if n_32ths <= beam["end"]:
+            return False
+
+    return True
 
 WIDTH = 800
 HEIGHT = 600
@@ -123,11 +130,11 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.SCA
 # screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # we're passing in a list for each subdivision of the beat which will contain each type of drum played. (and also the duration of that hit)
-def draw_bar(data : list[list[tuple[DrumType, NoteType]]]):
+def draw_bar(data : list[list[tuple[DrumType, NoteType]]], x=0, y=0, bar_padding=100, clef_height=200):
 
     # draw bar (where notes will be placed)
-    BAR_PADDING = 100
-    CLEF_HEIGHT = 200
+    BAR_PADDING = bar_padding
+    CLEF_HEIGHT = clef_height
 
     half_screen_height = HEIGHT / 2.0
     half_clef_height = CLEF_HEIGHT / 2.0
@@ -165,7 +172,10 @@ def draw_bar(data : list[list[tuple[DrumType, NoteType]]]):
     n_32ths = 0
 
     # [(beam_end, duration_32ths), (beam_end, duration_32ths), (beam_end, duration_32ths)]
-    beam_until = [(0,0)]
+    # beam_until = [(0,0)]
+
+    # list of dicts which have a start, end, and duration (32ths)
+    beams : list[dict] = []
     drawing_beam : bool = False
     beam_drawn_on_top = False
 
@@ -183,102 +193,178 @@ def draw_bar(data : list[list[tuple[DrumType, NoteType]]]):
             is_cymbol_hit = DrumType.is_cymbol_hit(drum_type)
 
             # if n_32ths > beam_until[-1][0] or beam_until[-1][0] == 0:
-            if (not drawing_beam) or n_32ths > beam_until[0][0]:
+            if (not drawing_beam) or should_recalculate_beams(beams, n_32ths):
 
-                # the number of 32ths to draw beam to
-                beam_length_32ths = 0
-                beam_until = []
-                # beam_index = 0
+                beams.clear()
+                beam_length_32ths = n_32ths
                 search_index = i
-                last_shortest_duration = 0
-                all_time_shortest_duration = BIG_NUMBER
-                search_note_length = NOTE_TYPE_TO_32TH_LENGTH[note_type_no_dots]
+                last_shortest_duration = BIG_NUMBER
 
-                beam_drawn_on_top = HIT_TYPE_TO_POSITION_ON_CLEF[drum_type] > MIDDLE_OF_CLEF_POSITION
+                # length -> (first occurance (32ths), last occurance (32ths), another_note_found)
+                distinct_lengths = {}
+                smaller_duration_found = False
+                i_shortest_duration = BIG_NUMBER
 
-                # 1 quarter note = 1/4, 1 32th note = 1/32, so there're 8 32th notes in a quarter note.
-                while (beam_length_32ths < MAX_BEAM_WIDTH * 8) and (search_index < len(data)):
-                    
-                    i_shortest_duration = BIG_NUMBER
-                    note_length_equal_or_less_than_found : bool = True
-                    all_durations_are_equal : bool = True
+                while (beam_length_32ths - n_32ths < MAX_BEAM_WIDTH * 8) and (search_index < len(data)):
+
+                    i_biggest_duration = 0
+                    i_i_shortest_duration = BIG_NUMBER
 
                     for k in data[search_index]:
+
+                        # print(beam_length_32ths)
+
+                        # we don't care about hit type
+                        note_length = NoteType.note_to_note_no_dots(k[1])
+                        note_length_32ths = NOTE_TYPE_TO_32TH_LENGTH[note_length]
+
+                        # this should check if it's in the keys, right?
+                        if note_length in distinct_lengths:
+                            # if in keys, we're still in a beam.
+
+                            # if our n_32ths is greater than the previous last occurance value, then this note came too late.
+                            if beam_length_32ths > distinct_lengths[note_length][1]:
+                                # add new beam to beam list
+
+                                # here we're just making sure that there's another note of the same length to connect the original note to
+                                if distinct_lengths[note_length][2]:
+                                    beams.append({"start": distinct_lengths[note_length][0], "end": distinct_lengths[note_length][1] - note_length_32ths, "duration": note_length_32ths})
+                                
+                                # then we change the dictionary to have the new values of this current note
+                                distinct_lengths[note_length] = [beam_length_32ths, beam_length_32ths + note_length_32ths, False]
+
+                            else:
+
+                                if beam_length_32ths == distinct_lengths[note_length][0]:
+                                    continue
+
+                                # print(f"BEFORE CHANGE:\n{distinct_lengths=}")
+
+                                distinct_lengths[note_length][1] += note_length_32ths
+                                distinct_lengths[note_length][1] = min(distinct_lengths[note_length][1], n_32ths + (MAX_BEAM_WIDTH * 8))
+
+                                distinct_lengths[note_length][2] = True
+
+                                # print(f"CHANGED:\n{distinct_lengths=}\nCHANGED_END")
+
+                        else:
+                            # if not in keys, we're creating the beam?
+                            distinct_lengths[note_length] = [beam_length_32ths, beam_length_32ths + note_length_32ths, False]
+                            # print(f"ADDED: {distinct_lengths[note_length]}")
                         
-                        # we'll only draw the beam on top if NONE of the notes are above the middle of the clef.
-                        if beam_drawn_on_top:
-                            beam_drawn_on_top = HIT_TYPE_TO_POSITION_ON_CLEF[k[0]] > MIDDLE_OF_CLEF_POSITION
+                        if smaller_duration_found:
 
-                        i_note_type = NoteType.note_to_note_no_dots(k[1])
+                            smaller_duration_found = False
+                            # print("\n\nhere?\n\n")
+                            # print(f"{beam_length_32ths=}")
 
-                        # kind of janky/gross solution to proritize grouping in quarters of the beat
-                        if NOTE_TYPE_TO_32TH_LENGTH[i_note_type] > search_note_length and 2 >= beam_length_32ths % 8:
-                            note_length_equal_or_less_than_found = False
+                            # print(f"before::: {distinct_lengths=}")
 
-                        if NOTE_TYPE_TO_32TH_LENGTH[i_note_type] < i_shortest_duration:
+                            for distinct_length in list(distinct_lengths.keys()):
+
+                                note_length_32ths = NOTE_TYPE_TO_32TH_LENGTH[distinct_length]
+
+                                beams.append({"start": distinct_lengths[distinct_length][0], "end": beam_length_32ths, "duration": note_length_32ths})
+                                distinct_lengths.pop(distinct_length)
+                            
+                            # print(f"after::: {distinct_lengths=}")
+
+                        if note_length_32ths < i_shortest_duration:
 
                             if i_shortest_duration != BIG_NUMBER:
-                                all_durations_are_equal = False
+                                smaller_duration_found = True
 
-                            i_shortest_duration = NOTE_TYPE_TO_32TH_LENGTH[i_note_type]
-
-                        # i_shortest_duration = min(i_shortest_duration, NOTE_TYPE_TO_32TH_LENGTH[i_note_type])
-                        search_note_length = min(search_note_length, i_shortest_duration)
-
-                    last_shortest_duration = i_shortest_duration
-                    if (not note_length_equal_or_less_than_found) or i_shortest_duration >= 8:
-                        break
+                        i_shortest_duration = min(i_shortest_duration, note_length_32ths)
+                        i_biggest_duration = max(i_biggest_duration, note_length_32ths)
+                        i_i_shortest_duration = min(i_i_shortest_duration, note_length_32ths)
                     
-                    if i_shortest_duration < all_time_shortest_duration:
+                    for distinct_length in list(distinct_lengths.keys()):
 
-                        drawing_beam = True
+                        if not distinct_lengths[distinct_length][2]:
+                            # no note of same length to connect to.
+                            continue
 
-                        # print(f"{i_shortest_duration=}")
+                        note_length_32ths = NOTE_TYPE_TO_32TH_LENGTH[distinct_length]
 
-                        # if all_time_shortest_duration != BIG_NUMBER or not all_durations_are_equal:
-                        beam_until.insert(0, (n_32ths + beam_length_32ths, i_shortest_duration))
-
-                        all_time_shortest_duration = i_shortest_duration
-                        # beam_index += 1
-
-                        # if beam_index >= len(beam_until):
-                        #     beam_until.append(0)
-
-                    beam_length_32ths += i_shortest_duration
+                        if note_length_32ths < i_biggest_duration:
+                            smaller_duration_found = True
+                            beams.append({"start": distinct_lengths[distinct_length][0], "end": distinct_lengths[distinct_length][1] - note_length_32ths, "duration": note_length_32ths})
+                            distinct_lengths.pop(distinct_length)
+                            # remove from dict
+                    
+                    # print(distinct_lengths)
+                    beam_length_32ths += i_i_shortest_duration
                     search_index += 1
 
+                    # if smaller_duration_found:
+                        
+                    #     for distinct_length in list(distinct_lengths.keys()):
+
+                    #         if not distinct_lengths[distinct_length][2]:
+                    #             continue
+
+                    #         note_length_32ths = NOTE_TYPE_TO_32TH_LENGTH[distinct_length]
+
+                    #         beams.append({"start": distinct_lengths[distinct_length][0], "end": distinct_lengths[distinct_length][1] - (note_length_32ths * 2), "duration": note_length_32ths})
+                    #         distinct_lengths.pop(distinct_length)
+
+                    
+                # when the search is done, clean up any remaining distinct_lengths
+                for distinct_length in distinct_lengths:
+
+                    # print(distinct_lengths)
+
+                    # print("hererere")
+
+                    if not distinct_lengths[distinct_length][2]:
+                        # no note of same length to connect to.
+                        continue
+
+                    note_length_32ths = NOTE_TYPE_TO_32TH_LENGTH[distinct_length]
+                    
+                    beams.append({"start": distinct_lengths[distinct_length][0], "end": distinct_lengths[distinct_length][1] - note_length_32ths, "duration": note_length_32ths})
+
+                # print("CLEANUP")
+                # print(beams)
+
                 # beam_until.append((n_32ths + beam_length_32ths - last_shortest_duration, last_shortest_duration))
+                drawing_beam = len(beams) != 0
 
                 if drawing_beam:
-                    drawing_beam = True
-                    beam_until.insert(0, (n_32ths + beam_length_32ths - last_shortest_duration, last_shortest_duration))
+                    # drawing_beam = True
+                    # beam_until.insert(0, (n_32ths + beam_length_32ths - last_shortest_duration, last_shortest_duration))
                     # print(f"{beam_until=}")
                     
-                    biggest_beam_width = 0
-                    for beam in beam_until:
-                        biggest_beam_width = max(biggest_beam_width, beam[0])
+                    # biggest_beam_width = 0
+                    # for beam in beam_until:
+                    #     biggest_beam_width = max(biggest_beam_width, beam[0])
                     
                     # print(f"{biggest_beam_width=}")
 
-                    for beam_index_i in range(len(beam_until)):
+                    for beam_index_i in range(len(beams)):
 
                         # probably a bad solution:
                         # if beam_until[beam_index_i][0] == biggest_beam_width:
                         #     continue
 
-                        beam_end_x = NOTE_PADDING + BAR_PADDING + (biggest_beam_width / 28.0) * (WIDTH - (BAR_PADDING + NOTE_PADDING) * 2) - CYMBAL_SYMBOL_LENGTH
+                        # beam_end_x = NOTE_PADDING + BAR_PADDING + (biggest_beam_width / 28.0) * (WIDTH - (BAR_PADDING + NOTE_PADDING) * 2) - CYMBAL_SYMBOL_LENGTH
 
                         # beam_start_x = x_pos
                         # if is_cymbol_hit:
                         #     beam_start_x -= CYMBAL_SYMBOL_LENGTH
 
-                        beam_start_x = NOTE_PADDING + BAR_PADDING + (beam_until[beam_index_i][0] / 28.0) * (WIDTH - (BAR_PADDING + NOTE_PADDING) * 2) - CYMBAL_SYMBOL_LENGTH
+                        if beams[beam_index_i]["duration"] >= 8:
+                            continue
+
+                        beam_start_x = NOTE_PADDING + BAR_PADDING + (beams[beam_index_i]["start"] / 28.0) * (WIDTH - (BAR_PADDING + NOTE_PADDING) * 2) - CYMBAL_SYMBOL_LENGTH
+                        beam_end_x = NOTE_PADDING + BAR_PADDING + (beams[beam_index_i]["end"] / 28.0) * (WIDTH - (BAR_PADDING + NOTE_PADDING) * 2) - CYMBAL_SYMBOL_LENGTH
 
                         beam_y_pos = BEAM_POSITION_BOTTOM - HALF_BEAM_Y_SIZE
                         if beam_drawn_on_top:
                             beam_y_pos = BEAM_POSITION_TOP - HALF_BEAM_Y_SIZE
                         
-                        beam_y_pos -= (2-(beam_until[beam_index_i][1] / 2.0)) * 5
+                        
+                        beam_y_pos -= (2-(beams[beam_index_i]["duration"] / 2.0)) * 5
                         # print(f"{beam_index_i}, ({beam_start_x:.2f}:{beam_end_x:.2f}, {beam_y_pos}) a.k.a. {beam_until[beam_index_i][0]}:{biggest_beam_width}")
 
                         pygame.draw.line(screen, BLACK, (beam_start_x, beam_y_pos), (beam_end_x, beam_y_pos), width=HALF_BEAM_Y_SIZE*2)
@@ -300,7 +386,7 @@ def draw_bar(data : list[list[tuple[DrumType, NoteType]]]):
                 pygame.draw.ellipse(screen, BLACK, pygame.Rect(x_pos + 2, y_pos - (NOTE_ELLIPSE_HEIGHT / 2.0), NOTE_ELLIPSE_WIDTH, NOTE_ELLIPSE_HEIGHT))
 
             # draw beam
-            if drawing_beam and n_32ths <= beam_until[0][0]:
+            if drawing_beam and not(should_recalculate_beams(beams, n_32ths)):
 
                 beam_y_pos = BEAM_POSITION_BOTTOM 
                 if beam_drawn_on_top:
@@ -323,12 +409,20 @@ def draw_bar(data : list[list[tuple[DrumType, NoteType]]]):
     
     pygame.display.flip()
 
-# draw_bar([[(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Snare, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)],
-#           [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Snare, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)]])
+# bar_data = [[(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Snare, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)],
+#           [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Snare, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)]]
 
-draw_bar([[(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)],
-          [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)]])
+bar_data = [[(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)],
+         [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)]]
 
-# draw_bar([[(DrumType.Snare, NoteType.QuarterNote)], [(DrumType.Snare, NoteType.QuarterNote)], [(DrumType.Snare, NoteType.QuarterNote)], [(DrumType.Snare, NoteType.QuarterNote)]])
+# bar_data = [[(DrumType.Snare, NoteType.QuarterNote)], [(DrumType.Snare, NoteType.QuarterNote)], [(DrumType.Snare, NoteType.QuarterNote)], [(DrumType.Snare, NoteType.QuarterNote)]]
+
+# bar_data = [[(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Snare, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.SixteenthNote)], [(DrumType.Snare, NoteType.SixteenthNote)],
+#           [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Snare, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.SixteenthNote)], [(DrumType.Snare, NoteType.SixteenthNote)]]
+
+# bar_data = [[(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)],
+#           [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)]]
+
+draw_bar(bar_data)
 
 input()
