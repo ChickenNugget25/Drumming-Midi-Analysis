@@ -140,16 +140,16 @@ def draw_bar(data : list[list[tuple[DrumType, NoteType]]], x=0, y=0, bar_padding
     half_clef_height = CLEF_HEIGHT / 2.0
 
     # pygame.draw.rect(screen, (255,255,255), pygame.Rect(0,0,WIDTH,HEIGHT))
-    screen.fill(WHITE)
+    # screen.fill(WHITE)
 
-    pygame.draw.line(screen, BLACK, (BAR_PADDING, half_screen_height - half_clef_height), (BAR_PADDING, half_screen_height + half_clef_height), width=3)
-    pygame.draw.line(screen, BLACK, (WIDTH - BAR_PADDING, half_screen_height - half_clef_height), (WIDTH - BAR_PADDING, half_screen_height + half_clef_height), width=3)
+    pygame.draw.line(screen, BLACK, (BAR_PADDING + x, half_screen_height - half_clef_height + y), (BAR_PADDING + x, half_screen_height + half_clef_height + y), width=3)
+    pygame.draw.line(screen, BLACK, (WIDTH - BAR_PADDING + x, half_screen_height - half_clef_height + y), (WIDTH - BAR_PADDING + x, half_screen_height + half_clef_height + y), width=3)
 
     for i in range(5):
 
         y_value = (half_screen_height - half_clef_height) + (CLEF_HEIGHT / 4.0) * i
 
-        pygame.draw.line(screen, BLACK, (BAR_PADDING, y_value), (WIDTH - BAR_PADDING, y_value), width=2)
+        pygame.draw.line(screen, BLACK, (BAR_PADDING + x, y_value + y), (WIDTH - BAR_PADDING + x, y_value + y), width=2)
 
     # draw notes
     NOTE_PADDING = 50
@@ -158,11 +158,11 @@ def draw_bar(data : list[list[tuple[DrumType, NoteType]]], x=0, y=0, bar_padding
     NOTE_ELLIPSE_HEIGHT = 10
     NOTE_TAIL_HEIGHT = 30
 
-    BAR_START_HEIGHT = half_screen_height - half_clef_height
+    BAR_START_HEIGHT = half_screen_height - half_clef_height + y
 
     BEAM_OFFSET = 50
-    BEAM_POSITION_BOTTOM = half_screen_height + half_clef_height + BEAM_OFFSET
-    BEAM_POSITION_TOP = half_screen_height - (half_clef_height + BEAM_OFFSET)
+    BEAM_POSITION_BOTTOM = half_screen_height + half_clef_height + BEAM_OFFSET + y
+    BEAM_POSITION_TOP = half_screen_height - (half_clef_height + BEAM_OFFSET) + y
     HALF_BEAM_Y_SIZE = 2
 
     # in quarter note durations
@@ -188,8 +188,8 @@ def draw_bar(data : list[list[tuple[DrumType, NoteType]]], x=0, y=0, bar_padding
             note_type = j[1]
             note_type_no_dots = NoteType.note_to_note_no_dots(note_type)
 
-            x_pos = NOTE_PADDING + BAR_PADDING + (n_32ths / 28.0) * (WIDTH - (BAR_PADDING + NOTE_PADDING) * 2)
-            y_pos = BAR_START_HEIGHT + (HIT_TYPE_TO_POSITION_ON_CLEF[drum_type] / 8.0) * CLEF_HEIGHT
+            x_pos = NOTE_PADDING + BAR_PADDING + (n_32ths / 28.0) * (WIDTH - (BAR_PADDING + NOTE_PADDING) * 2)# + x
+            y_pos = BAR_START_HEIGHT + (HIT_TYPE_TO_POSITION_ON_CLEF[drum_type] / 8.0) * CLEF_HEIGHT# + y
             is_cymbol_hit = DrumType.is_cymbol_hit(drum_type)
 
             # if n_32ths > beam_until[-1][0] or beam_until[-1][0] == 0:
@@ -423,6 +423,10 @@ bar_data = [[(DrumType.HiHatOpen, NoteType.EighthNote), (DrumType.Kick, NoteType
 # bar_data = [[(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)],
 #           [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.HiHatClosed, NoteType.EighthNote), (DrumType.Kick, NoteType.EighthNote)], [(DrumType.Snare, NoteType.SixteenthNote)], [(DrumType.Kick, NoteType.SixteenthNote)], [(DrumType.HiHatOpen, NoteType.EighthNote)]]
 
-draw_bar(bar_data)
+screen.fill(WHITE)
+
+draw_bar(bar_data, 0, 100, clef_height=100)
+
+draw_bar([], 0, -100, clef_height=100)
 
 input()
