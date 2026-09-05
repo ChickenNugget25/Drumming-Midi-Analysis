@@ -1,0 +1,1195 @@
+{
+	"ads": {
+		"bannerHiddenUntil": null,
+		"notsyFailed": null,
+		"notsyLoaded": null
+	},
+	"aiTabOverlay": {
+		"lastGeneratedMeasureIndex": null,
+		"loaded": false,
+		"skipForTabs": []
+	},
+	"audio": {
+		"audio": null,
+		"audioUrls": [],
+		"isAudioFailed": false,
+		"isAudioNetworkFailed": false,
+		"version": 4
+	},
+	"audioDiffAfter": {
+		"audio": null,
+		"audioUrls": [],
+		"isAudioFailed": false,
+		"isAudioNetworkFailed": false,
+		"version": 4
+	},
+	"audioDiffBefore": {
+		"audio": null,
+		"audioUrls": [],
+		"isAudioFailed": false,
+		"isAudioNetworkFailed": false,
+		"version": 4
+	},
+	"autocompleteBarUI": {
+		"limits": null,
+		"limitsError": null,
+		"limitsLoading": false,
+		"processingMeasures": [],
+		"processingRequests": {}
+	},
+	"bonus": {
+		"activatingPlus": false,
+		"activatingPurchase": false,
+		"permanentEditorBonus": false
+	},
+	"browser": {
+		"browsersListEnv": "latest",
+		"family": null,
+		"version": null
+	},
+	"chatbot": {
+		"accessKey": null,
+		"connectionState": "loading",
+		"error": null,
+		"isClearingHistory": false,
+		"isVisible": false,
+		"messages": [],
+		"stoppedTurnIds": [],
+		"transportType": "http",
+		"usageLimitInvites": {},
+		"usageLimitInviteShownTurnIds": {}
+	},
+	"chordDiagram": [],
+	"chordDiagramActive": null,
+	"chordDiagramActiveScrollVersion": 0,
+	"chordpro": {
+		"chordsRevisionId": 0,
+		"current": null,
+		"isFailed": false,
+		"isNetworkFailed": false,
+		"isNotFound": false,
+		"loading": null,
+		"songId": 0
+	},
+	"chords": {
+		"chordsRevisionId": null,
+		"current": null,
+		"isFailed": false,
+		"isNetworkFailed": false,
+		"isNotFound": false,
+		"loading": null,
+		"songId": 0
+	},
+	"chordsAutoscroll": {
+		"enabled": false,
+		"speed": 1
+	},
+	"chordsCapo": {
+		"auto": false,
+		"enabled": false,
+		"fret": null,
+		"fromChordpro": false,
+		"manuallyDisabled": false
+	},
+	"chordsCapoMessage": null,
+	"chordsSimplify": false,
+	"chordsTransposeNotation": 0,
+	"consent": {
+		"loading": false,
+		"options": null,
+		"suite": null,
+		"view": null
+	},
+	"contextHints": {
+		"shown": {},
+		"skipNext": false
+	},
+	"contributions": {
+		"defaultInstrument": 1024,
+		"error": false,
+		"filters": {
+			"difficulty": "Any difficulty",
+			"instrument": "ANY INSTRUMENTS",
+			"tunings": {}
+		},
+		"kind": "boot",
+		"loading": false,
+		"songsRaw": []
+	},
+	"controls": {
+		"minimized": false
+	},
+	"curiosity": {
+		"conversion": {},
+		"referer": {},
+		"spent10": {
+			"count": 0
+		},
+		"spent5MinutesWithApp": {
+			"count": 0
+		}
+	},
+	"cursor": {
+		"isFailed": false,
+		"position": {
+			"cursor": 0,
+			"loopEnd": 0,
+			"loopStart": 0
+		},
+		"replayCursor": 0,
+		"saveReplayCursor": false
+	},
+	"cursorDiffAfter": {
+		"isFailed": false,
+		"position": {
+			"cursor": 0,
+			"loopEnd": 0,
+			"loopStart": 0
+		},
+		"replayCursor": 0,
+		"saveReplayCursor": false
+	},
+	"cursorDiffBefore": {
+		"isFailed": false,
+		"position": {
+			"cursor": 0,
+			"loopEnd": 0,
+			"loopStart": 0
+		},
+		"replayCursor": 0,
+		"saveReplayCursor": false
+	},
+	"demo": {
+		"active": false,
+		"enabled": false
+	},
+	"detectedChords": {
+		"loadingToken": null,
+		"publishedOverlayKey": null,
+		"rejectedChords": {},
+		"sessions": {},
+		"stagedChords": {}
+	},
+	"device": {
+		"country": "US",
+		"hasCCPA": true,
+		"hasGDPR": false,
+		"isDesktop": true,
+		"isPhone": false,
+		"isTablet": false,
+		"localeCode": "en",
+		"locales": [],
+		"os": {
+			"name": "Other",
+			"version": "0.0.0"
+		},
+		"type": "bot",
+		"webview": false
+	},
+	"diffGp": {
+		"importFileKey": 0
+	},
+	"diffMeta": {
+		"after": {
+			"revisionId": 0
+		},
+		"allowedByLicense": true,
+		"before": {
+			"revisionId": 0
+		},
+		"current": null,
+		"isContributor": false,
+		"isFailed": false,
+		"isNetworkFailed": false,
+		"isNotFound": false,
+		"loading": null,
+		"songId": 0
+	},
+	"diffPart": {
+		"afterRendered": null,
+		"beforeRendered": null,
+		"groups": null,
+		"insignificantChanges": {
+			"count": 0,
+			"keys": [],
+			"onlyCount": 0
+		},
+		"isEmpty": false,
+		"isFailed": false,
+		"isNetworkFailed": false,
+		"isNotFound": false
+	},
+	"diffParts": {
+		"after": {},
+		"before": {}
+	},
+	"diffPlayer": {
+		"constraints": null,
+		"constraintsReached": false,
+		"currentPlayer": "diffAfter",
+		"playStartCursor": null,
+		"source": "audio",
+		"sourceBeforeSeparatedAudio": null
+	},
+	"diffTracks": {},
+	"diffUI": {
+		"insignificantShown": false,
+		"pairsWithNotationOpened": [],
+		"scrollPosition": null,
+		"unchangedShown": false
+	},
+	"drawPreferences": {
+		"loaded": true,
+		"multirestEnabled": true
+	},
+	"drawSettings": {
+		"loaded": true,
+		"multirestEnabled": true
+	},
+	"drawSettingsOverride": {},
+	"editAnalysis": {
+		"message": "",
+		"messageIsError": false,
+		"open": false,
+		"search": {
+			"status": "idle"
+		},
+		"stack": []
+	},
+	"editorCursorHover": {
+		"cursor": null
+	},
+	"editorResolvingUI": {
+		"unresolvedAction": null
+	},
+	"editorSettings": {
+		"playCursorNotes": false
+	},
+	"editorSound": {
+		"activeBeatPlayer": null,
+		"beatPlayerLoading": false
+	},
+	"editorTransposeUI": {
+		"isLiveTranspose": false,
+		"semitones": 0
+	},
+	"editorUI": {
+		"buffer": null,
+		"bufferDuration": null,
+		"cursor": [
+			[
+				0,
+				0,
+				0,
+				0,
+				0
+			]
+		],
+		"downloadingEditsAsFile": false,
+		"dragHintTimeout": null,
+		"drumEditingMode": "current-line",
+		"drumsOrder": [],
+		"drumsUnpinned": false,
+		"editsToPropagateByMeasure": {},
+		"forceScrollRequestId": 0,
+		"fretboard": {
+			"open": false,
+			"preferences": null,
+			"reopenForTab": null
+		},
+		"lastAction": null,
+		"propagatedMeasures": null,
+		"redoAvailable": false,
+		"selectedVoice": 0,
+		"showLayers": false
+	},
+	"experiments": {
+		"at_ovl_fade": {
+			"segment": "off",
+			"status": "pending"
+		},
+		"chat_paywall": {
+			"segment": "off",
+			"status": "pending"
+		},
+		"default_curs_preview": {
+			"segment": "off",
+			"status": "pending"
+		},
+		"detect_chords": {
+			"segment": "on",
+			"status": "pending"
+		},
+		"fingerstyle_arr": {
+			"segment": "on",
+			"status": "pending"
+		},
+		"fretboard_v2": {
+			"segment": "on",
+			"status": "pending"
+		},
+		"guit_bass_st_not": {
+			"segment": "off",
+			"status": "pending"
+		},
+		"helpdesk": {
+			"segment": "off",
+			"status": "pending"
+		},
+		"karma": {
+			"segment": "off",
+			"status": "pending"
+		},
+		"multirest": {
+			"segment": "on",
+			"status": "pending"
+		},
+		"new_revision_indicator": {
+			"segment": "on",
+			"status": "pending"
+		},
+		"purchase_context_signin": {
+			"segment": "on",
+			"status": "pending"
+		},
+		"regen_in_player": {
+			"segment": "off",
+			"status": "pending"
+		},
+		"std_pa_notation": {
+			"segment": "off",
+			"status": "pending"
+		}
+	},
+	"faq": {
+		"isError": false,
+		"isLoading": false
+	},
+	"favorites": {
+		"actions": [],
+		"defaultInstrument": 1024,
+		"error": false,
+		"filters": {
+			"difficulty": "Any difficulty",
+			"instrument": "ANY INSTRUMENTS",
+			"sortBy": "artist",
+			"tunings": {}
+		},
+		"kind": "boot",
+		"loading": null,
+		"songsRaw": []
+	},
+	"fingeringDebug": {
+		"activeParts": [],
+		"engineRev": 0
+	},
+	"hash": "",
+	"historyUI": {
+		"applying": false,
+		"pointer": 0,
+		"songId": 1258317,
+		"total": 0
+	},
+	"inbox": {
+		"fetchingItems": false,
+		"fetchingNumUnreads": false,
+		"hasMoreItems": true,
+		"inboxError": null,
+		"items": null,
+		"numUnreads": null,
+		"seed": {}
+	},
+	"isTestMode": false,
+	"layer": {
+		"kept": {},
+		"layer": null
+	},
+	"leadSheet": {
+		"enterAfterRouteChange": false,
+		"on": false,
+		"openedForPart": null,
+		"supportByPart": null
+	},
+	"learnMarkers": {
+		"data": []
+	},
+	"locale": {
+		"code": "en"
+	},
+	"meta": {
+		"allowedByLicense": true,
+		"current": {
+			"aiGenerated": true,
+			"artist": "Cage The Elephant",
+			"artistId": 7178,
+			"audios": {
+				"current": {
+					"hash": "v4-MXTrxGmIXhNwldo2TGMpS",
+					"meta": {
+						"hasMixLayout": true,
+						"hasQuickMix": true
+					}
+				},
+				"v4": {
+					"hash": "v4-MXTrxGmIXhNwldo2TGMpS",
+					"meta": {
+						"hasMixLayout": true,
+						"hasQuickMix": true
+					}
+				}
+			},
+			"audioV4": "v4-MXTrxGmIXhNwldo2TGMpS",
+			"audioV4Generated": "1743943600928",
+			"audioV4Meta": {
+				"hasMixLayout": true,
+				"hasQuickMix": true
+			},
+			"audioV4Midi": "v4-MXTrxGmIXhNwldo2TGMpS",
+			"author": {
+				"isModerator": false,
+				"name": "angel.cb_",
+				"personId": 3174760,
+				"profileName": "angel-cb-"
+			},
+			"createdAt": "2025-04-06T12:35:41.575Z",
+			"createdVia": "AI",
+			"defaultTrack": 0,
+			"description": "Initial revision",
+			"favoritesCount": 115,
+			"hasChords": false,
+			"hasPlayer": true,
+			"hasTracks": true,
+			"image": "v4-3-5-zQ7ZA-W1h-3smhiw",
+			"isBlank": false,
+			"isBlocked": false,
+			"isCollaborative": false,
+			"isJunk": false,
+			"isOnModeration": false,
+			"isPopular": true,
+			"isPublished": true,
+			"isRestricted": false,
+			"lyrics": false,
+			"moderationType": "no",
+			"partId": 2,
+			"popularTrack": 0,
+			"popularTrackBass": 1,
+			"popularTrackDrum": 2,
+			"popularTrackGuitar": 0,
+			"restriction": "",
+			"revisionId": 1680209,
+			"songId": 1258317,
+			"tags": [
+				"alternative rock",
+				"blues rock",
+				"garage rock",
+				"indie rock",
+				"psychedelic rock",
+				"rock",
+				"surf punk"
+			],
+			"title": "Telescope",
+			"tracks": [
+				{
+					"difficulty": 2,
+					"hash": "guitar_p1Dl7dBb",
+					"instrument": "Electric Guitar (clean)",
+					"instrumentId": 27,
+					"isBassGuitar": false,
+					"isDrums": false,
+					"isEmpty": false,
+					"isGuitar": true,
+					"isPiano": false,
+					"isVocalTrack": false,
+					"name": "",
+					"originalPartId": 0,
+					"partId": 0,
+					"title": "Electric Guitar (clean)",
+					"tuning": [
+						64,
+						59,
+						55,
+						50,
+						45,
+						40
+					],
+					"views": 1208
+				},
+				{
+					"difficulty": 2,
+					"hash": "bass_x77gGhct",
+					"instrument": "Electric Bass (finger)",
+					"instrumentId": 33,
+					"isBassGuitar": true,
+					"isDrums": false,
+					"isEmpty": false,
+					"isGuitar": false,
+					"isPiano": false,
+					"isVocalTrack": false,
+					"name": "",
+					"originalPartId": 1,
+					"partId": 1,
+					"title": "Electric Bass (finger)",
+					"tuning": [
+						43,
+						38,
+						33,
+						28
+					],
+					"views": 1084
+				},
+				{
+					"difficulty": 2,
+					"hash": "drums_Ya5VNb2u",
+					"instrument": "Drums",
+					"instrumentId": 1024,
+					"isBassGuitar": false,
+					"isDrums": true,
+					"isEmpty": false,
+					"isGuitar": false,
+					"isPiano": false,
+					"isVocalTrack": false,
+					"name": "",
+					"originalPartId": 2,
+					"partId": 2,
+					"title": "Drums",
+					"views": 260
+				}
+			],
+			"videos": [
+				{
+					"feature": null,
+					"id": 840046,
+					"status": "done",
+					"videoId": "R6sBk5MlGGA"
+				},
+				{
+					"feature": "alternative",
+					"id": 1634336,
+					"status": "done",
+					"videoId": "ZvcXU5RGkcE"
+				},
+				{
+					"feature": "backing",
+					"id": 3190878,
+					"status": "done",
+					"videoId": "ZJ2GgCJikk0"
+				},
+				{
+					"feature": "solo",
+					"id": 3361310,
+					"status": "done",
+					"videoId": "2FV7zztYy28"
+				},
+				{
+					"feature": "backing",
+					"id": 4406360,
+					"status": "done",
+					"videoId": "gwlptKCZqmQ"
+				},
+				{
+					"feature": "alternative",
+					"id": 5928114,
+					"status": "done",
+					"videoId": "tZVYsazc-mc"
+				},
+				{
+					"feature": "alternative",
+					"id": 5928124,
+					"status": "done",
+					"videoId": "tZVYsazc-mc"
+				},
+				{
+					"feature": "alternative",
+					"id": 5928131,
+					"status": "done",
+					"videoId": "CBUIazlnZXA"
+				}
+			],
+			"views": 2552
+		},
+		"isFailed": false,
+		"isForbiddenUnpublished": false,
+		"isNetworkFailed": false,
+		"isNotFound": false,
+		"loading": null,
+		"originalTracks": [
+			{
+				"difficulty": 2,
+				"hash": "guitar_p1Dl7dBb",
+				"instrument": "Electric Guitar (clean)",
+				"instrumentId": 27,
+				"isBassGuitar": false,
+				"isDrums": false,
+				"isEmpty": false,
+				"isGuitar": true,
+				"isPiano": false,
+				"isVocalTrack": false,
+				"name": "",
+				"partId": 0,
+				"title": "Electric Guitar (clean)",
+				"tuning": [
+					64,
+					59,
+					55,
+					50,
+					45,
+					40
+				],
+				"views": 1208
+			},
+			{
+				"difficulty": 2,
+				"hash": "bass_x77gGhct",
+				"instrument": "Electric Bass (finger)",
+				"instrumentId": 33,
+				"isBassGuitar": true,
+				"isDrums": false,
+				"isEmpty": false,
+				"isGuitar": false,
+				"isPiano": false,
+				"isVocalTrack": false,
+				"name": "",
+				"partId": 1,
+				"title": "Electric Bass (finger)",
+				"tuning": [
+					43,
+					38,
+					33,
+					28
+				],
+				"views": 1084
+			},
+			{
+				"difficulty": 2,
+				"hash": "drums_Ya5VNb2u",
+				"instrument": "Drums",
+				"instrumentId": 1024,
+				"isBassGuitar": false,
+				"isDrums": true,
+				"isEmpty": false,
+				"isGuitar": false,
+				"isPiano": false,
+				"isVocalTrack": false,
+				"name": "",
+				"partId": 2,
+				"title": "Drums",
+				"views": 260
+			}
+		],
+		"partId": 2,
+		"partIds": [
+			2
+		],
+		"partInstrument": "drum",
+		"previousVisitAt": null,
+		"revisionId": null,
+		"songId": 1258317
+	},
+	"moderation": {
+		"deleteRevision": {
+			"processing": null,
+			"success": false
+		},
+		"deleteSong": {
+			"processing": null,
+			"success": false
+		},
+		"recoverRevision": {
+			"processing": null,
+			"success": false
+		},
+		"recoverSong": {
+			"processing": null,
+			"success": false
+		},
+		"songTasks": {
+			"renameRequests": []
+		},
+		"tasksStatistics": {
+			"completed": 0,
+			"info": ""
+		}
+	},
+	"multiPart": {
+		"enabled": false,
+		"partsOrder": [],
+		"selectedPartIds": [],
+		"view": null
+	},
+	"mytabs": {
+		"page": "favorites",
+		"pattern": ""
+	},
+	"network": {
+		"online": true,
+		"onlineUpdatedAt": 1785204310550
+	},
+	"notify": {
+		"key": null,
+		"notifications": [],
+		"visualKeys": false
+	},
+	"onboarding": {
+		"records": {},
+		"screenplay": "",
+		"skipShowNoteOnboardingText": false,
+		"stage": "",
+		"tutorial": false
+	},
+	"part": {
+		"current": null,
+		"isEdited": false,
+		"lines": {
+			"height": 0,
+			"lines": [],
+			"print": false,
+			"scale": 1,
+			"width": 0
+		},
+		"partId": 2,
+		"revisionId": 1680209,
+		"songId": 1258317
+	},
+	"parts": {
+		"isFailed": false,
+		"isNetworkFailed": false,
+		"isNotFound": false,
+		"loading": null,
+		"revisionId": 0,
+		"songId": 0
+	},
+	"partSwitchingUI": {
+		"initialPartId": null,
+		"isAvailable": false,
+		"isEnabled": false,
+		"isSwitching": false,
+		"preventSwitchIndex": null,
+		"previousSwitches": [],
+		"songsSwitchMarkers": [],
+		"switchAtCursor": null,
+		"switches": null,
+		"switchMarkers": null
+	},
+	"payment": {
+		"error": null,
+		"loading": false,
+		"module": null,
+		"plan": {
+			"currency": "USD",
+			"id": "plus_usd_9_99",
+			"price": "9.99"
+		},
+		"planPro": {
+			"currency": "USD",
+			"id": "pro_max_usd_49_99",
+			"price": "49.99"
+		},
+		"planSe": {
+			"currency": "USD",
+			"id": "plus_se_usd_9_99",
+			"price": "9.99"
+		},
+		"ready": false,
+		"showMigrationPopup": false,
+		"showPaymentIncreasePopup": false,
+		"token": null
+	},
+	"player": {
+		"audio": null,
+		"canPlay": false,
+		"constraints": null,
+		"instance": null,
+		"isCountin": false,
+		"isCountinBetweenLoops": false,
+		"isLoading": true,
+		"isLoopChanging": false,
+		"isMetronome": false,
+		"locks": [
+			"model"
+		],
+		"metronomeType": "regular",
+		"metronomeVolume": 50,
+		"midi": null,
+		"muteSound": false,
+		"partsMute": [],
+		"partsMutePrev": [],
+		"partsSolo": [],
+		"partsSoloPrev": [],
+		"partsToPlay": [],
+		"partsToPlayPrev": [],
+		"pitchShift": 0,
+		"playbackAvailable": true,
+		"previousPlayer": null,
+		"quickPlay": false,
+		"separatedAudio": null,
+		"separatedAudioSelected": false,
+		"shouldPlay": false,
+		"songId": 0,
+		"soundfont": null,
+		"soundVolume": 100,
+		"speed": 100,
+		"transposeNotation": 0,
+		"type": "focus",
+		"userAudio": null,
+		"userAudioSelected": false,
+		"videoOpened": false,
+		"voiceMetronomeAvailable": false,
+		"webworkerOperational": true
+	},
+	"playerDiffAfter": {
+		"audio": null,
+		"canPlay": false,
+		"constraints": null,
+		"instance": null,
+		"isCountin": false,
+		"isCountinBetweenLoops": false,
+		"isLoading": true,
+		"isLoopChanging": false,
+		"isMetronome": false,
+		"locks": [],
+		"metronomeType": "regular",
+		"metronomeVolume": 50,
+		"midi": null,
+		"muteSound": false,
+		"partsMute": [],
+		"partsMutePrev": [],
+		"partsSolo": [],
+		"partsSoloPrev": [],
+		"partsToPlay": [],
+		"partsToPlayPrev": [],
+		"pitchShift": 0,
+		"playbackAvailable": true,
+		"previousPlayer": null,
+		"quickPlay": false,
+		"separatedAudio": null,
+		"separatedAudioSelected": false,
+		"shouldPlay": false,
+		"songId": 0,
+		"soundfont": null,
+		"soundVolume": 100,
+		"speed": 100,
+		"transposeNotation": 0,
+		"type": "focus",
+		"userAudio": null,
+		"userAudioSelected": false,
+		"videoOpened": false,
+		"voiceMetronomeAvailable": false,
+		"webworkerOperational": true
+	},
+	"playerDiffBefore": {
+		"audio": null,
+		"canPlay": false,
+		"constraints": null,
+		"instance": null,
+		"isCountin": false,
+		"isCountinBetweenLoops": false,
+		"isLoading": true,
+		"isLoopChanging": false,
+		"isMetronome": false,
+		"locks": [],
+		"metronomeType": "regular",
+		"metronomeVolume": 50,
+		"midi": null,
+		"muteSound": false,
+		"partsMute": [],
+		"partsMutePrev": [],
+		"partsSolo": [],
+		"partsSoloPrev": [],
+		"partsToPlay": [],
+		"partsToPlayPrev": [],
+		"pitchShift": 0,
+		"playbackAvailable": true,
+		"previousPlayer": null,
+		"quickPlay": false,
+		"separatedAudio": null,
+		"separatedAudioSelected": false,
+		"shouldPlay": false,
+		"songId": 0,
+		"soundfont": null,
+		"soundVolume": 100,
+		"speed": 100,
+		"transposeNotation": 0,
+		"type": "focus",
+		"userAudio": null,
+		"userAudioSelected": false,
+		"videoOpened": false,
+		"voiceMetronomeAvailable": false,
+		"webworkerOperational": true
+	},
+	"playings": {
+		"diffBeforePlayings": null,
+		"metronomeTimeline": null,
+		"playings": null
+	},
+	"playlists": {
+		"defaultInstrument": 1024,
+		"error": false,
+		"filters": {
+			"difficulty": "Any difficulty",
+			"instrument": "ANY INSTRUMENTS",
+			"sortBy": "manual",
+			"tunings": {}
+		},
+		"kind": "boot",
+		"loading": null,
+		"playlists": [],
+		"songsRaw": []
+	},
+	"preferences": {
+		"apiApplying": false,
+		"apiValues": null,
+		"loaded": false,
+		"migrated": false,
+		"syncing": false
+	},
+	"print": {
+		"enabled": false,
+		"pending": false,
+		"zoom": 100
+	},
+	"promo": {
+		"feature": null,
+		"halfPlayed": 0,
+		"playbackPositionEvents": [],
+		"playbackTypeEvents": []
+	},
+	"publishSong": {
+		"duplicate": null,
+		"error": null,
+		"loading": false
+	},
+	"query": {},
+	"queryContent": {},
+	"requestAudio": {
+		"isOpened": false
+	},
+	"revisions": {
+		"current": [],
+		"isFailed": false,
+		"loading": null,
+		"songId": 0
+	},
+	"route": {
+		"isPanel": false,
+		"page": "tab",
+		"params": {
+			"contentMode": "tab",
+			"notationMode": "tab",
+			"partId": null,
+			"partIds": [],
+			"partInstrument": "drum",
+			"revisionId": null,
+			"songId": 1258317
+		}
+	},
+	"routeContent": {
+		"isPanel": false,
+		"page": "tab",
+		"params": {
+			"contentMode": "tab",
+			"notationMode": "tab",
+			"partId": null,
+			"partIds": [],
+			"partInstrument": "drum",
+			"revisionId": null,
+			"songId": 1258317
+		}
+	},
+	"runningThunks": {},
+	"screen": {
+		"biggerThenPhone": true,
+		"isLarge": true,
+		"isMedium": false,
+		"isSmall": false,
+		"isWide": false,
+		"screen": "large",
+		"viewport": {
+			"height": 900,
+			"width": 1070
+		}
+	},
+	"screener": {
+		"candidates": []
+	},
+	"separatedAudio": {
+		"fileUrls": [],
+		"isSelected": false,
+		"points": [],
+		"savedPosition": null,
+		"songId": null
+	},
+	"services": {
+		"container": {}
+	},
+	"shortcutsSettings": {
+		"invertPlusMinus": false,
+		"loaded": false
+	},
+	"showroom": {
+		"headerSequence": 0,
+		"panelSequence": -1
+	},
+	"songs": {
+		"aiAdDisabled": false,
+		"artistId": 0,
+		"artists": {
+			"7178": "Cage The Elephant"
+		},
+		"defaultInstrument": 1024,
+		"filters": {
+			"difficulty": "Any difficulty",
+			"instrument": "ANY INSTRUMENTS",
+			"tunings": {}
+		},
+		"loading": null,
+		"pattern": "",
+		"songs": {
+			"artistId": 0,
+			"defaultInstrument": 1024,
+			"filters": {
+				"difficulty": "Any difficulty",
+				"instrument": "ANY INSTRUMENTS",
+				"tunings": {}
+			},
+			"hasMore": true,
+			"list": [],
+			"pattern": ""
+		}
+	},
+	"soundAutomations": {
+		"parts": {}
+	},
+	"stack": {
+		"current": [],
+		"revisionId": 1680209,
+		"songId": 1258317
+	},
+	"stripe": {
+		"clientSecret": null,
+		"customPaymentMethodId": null,
+		"paypalClientId": null,
+		"publishableKey": null,
+		"subscribing": false,
+		"subscriptionId": null
+	},
+	"submitRevision": {
+		"savingRevision": false,
+		"savingRevisionError": null,
+		"status": "unset"
+	},
+	"tags": {
+		"current": null,
+		"isFailed": false,
+		"isNetworkFailed": false,
+		"isNotFound": false,
+		"loading": null,
+		"page": -1
+	},
+	"tempo": {
+		"tempo": {
+			"bpm": 72,
+			"position": 0,
+			"type": 4
+		}
+	},
+	"testMode": null,
+	"textpage": {
+		"isError": false,
+		"page": {
+			"content": "",
+			"slug": "",
+			"title": ""
+		}
+	},
+	"theme": "auto",
+	"transcriptions": {
+		"availableTranscriptionsCount": 0,
+		"error": false,
+		"limit": 0,
+		"loading": false,
+		"regenerateTranscriptionError": null,
+		"regenerateTranscriptionLoading": false,
+		"requestTabError": null,
+		"requestTabLoading": false,
+		"synchronizations": [],
+		"transcribeTab": {},
+		"transcribeTrackError": null,
+		"transcribeTrackLoading": false,
+		"transcriptions": []
+	},
+	"translations": {
+		"cachedLocale": "en",
+		"comments": {},
+		"revisions": {}
+	},
+	"uploads": {
+		"data": null,
+		"error": null,
+		"loading": false,
+		"success": false
+	},
+	"user": {
+		"hasPlus": false,
+		"isLoggedIn": false,
+		"profile": null
+	},
+	"userAudio": {
+		"backingOggKeys": [],
+		"file": null,
+		"isFetched": false,
+		"isFileConverted": false,
+		"isFileUploaded": false,
+		"isModalOpen": false,
+		"isSelected": false,
+		"points": [],
+		"pointsDiff": 0,
+		"separatedOggKeys": [],
+		"separationStatus": "not_started",
+		"songId": null,
+		"sourceBeforeModal": null,
+		"type": "focus"
+	},
+	"userProfile": {
+		"loading": true
+	},
+	"ut": {
+		"isAdditional": false,
+		"isClosing": false,
+		"isHidden": false,
+		"recorderState": "ready",
+		"stage": "hidden",
+		"steps": {
+			"instructions": 0,
+			"questions": 0,
+			"survey": 0
+		}
+	},
+	"video": {
+		"algoNewPointIndices": [],
+		"allVideos": [],
+		"altVideoLoading": false,
+		"apiScriptLoaded": false,
+		"current": null,
+		"currentVideoFullTitle": "",
+		"isFailed": false,
+		"isNetworkFailed": false,
+		"isNotFound": false,
+		"loading": null,
+		"openedSync": false,
+		"revisionId": 0,
+		"shouldAppear": false,
+		"showDelayedCross": false,
+		"songId": 0,
+		"syncRecording": false,
+		"videoPlayerError": null,
+		"videoPointsDiffBefore": null,
+		"videoPointsDiffBeforeList": [],
+		"videoPointsDiffBeforeLoading": null
+	},
+	"ytRequestAudio": {
+		"backingQuotaAvailable": null,
+		"isOpened": null,
+		"soloQuotaAvailable": null,
+		"updatedAt": null
+	}
+}

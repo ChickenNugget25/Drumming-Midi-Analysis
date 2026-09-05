@@ -1,5 +1,8 @@
 from enum import Enum
 
+SONG_JSON_FOLDER = "song_data"
+MUSIC_FOLDER = "music"
+
 # I haven't even seen 32th-notes yet in practice so I'm just not even coding them, lol. Maybe I'll change this once I encounter them.
 class NoteDuration(Enum):
 	WholeNote = -2,
@@ -47,7 +50,7 @@ class DrumType(Enum):
 	LowFloorTom = 41,
 	FloorTom = 41,
 	Kick = 36,
-	HiHatControl = 0xdeadbeef,
+	HiHatControl = 93,
 	Rest = -1
 
 # idk if I really need this but it's fancy

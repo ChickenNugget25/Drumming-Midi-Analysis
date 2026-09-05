@@ -20,8 +20,10 @@ songster_to_me_map = {
 	43: DrumType.HighFloorTom,
 	41: DrumType.FloorTom,
 	36: DrumType.Kick,
-	37: DrumType.SideStickSnare
-	# 38: DrumType.HiHatControl
+	37: DrumType.SideStickSnare,
+	93: DrumType.HiHatControl,
+	44: DrumType.LowTom,
+	97: DrumType.ClosedHiHat
 }
 
 # is this legal?
@@ -58,6 +60,24 @@ def translate_songsterr_data(filepath : str) -> list[list[dict]]:
 				beat_translation["notes"].append(songster_to_me_map[note["fret"]])
 
 			measure_translation.append(beat_translation)
+
+			# if it's a dotted note (numerator != 1)
+			if beat["duration"][0] != 1:
+
+				d = beat["duration"][0]
+
+				while d > 1:
+					d -= 1
+					measure_translation.append({"duration": Fraction(1, beat["duration"][1]), "notes": [DrumType.Rest]})
+
+			# or if it's a quarter note (or half note, or whole note)
+			elif beat["duration"][1] < 4:
+
+				# and not a rest
+				if not (DrumType.Rest in beat_translation["notes"]):
+					measure_translation[-1]["duration"] = Fraction(1, beat["duration"][1] * 2)
+					measure_translation.append({"duration": Fraction(1, beat["duration"][1] * 2), "notes": [DrumType.Rest]})
+
 
 		translation.append(measure_translation)
 

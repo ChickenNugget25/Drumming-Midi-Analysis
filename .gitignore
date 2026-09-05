@@ -1,3 +1,7 @@
 venv
-stuff
+song_data
 __pycache__
+midi_samples
+scrape.py
+music
+.DS_Store
